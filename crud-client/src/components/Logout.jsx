@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Loader from "./Loader";
+import "../css/profile.css";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
 const Logout = () => {
   const navigate = useNavigate();
   const [first, setFirst] = useState({});
+  const [list, setLists] = useState();
   const [loading, setLoading] = useState();
   useEffect(() => {
     try {
@@ -15,7 +17,7 @@ const Logout = () => {
           withCredentials: true,
         });
         setFirst(data?.user);
-        console.log(data);
+        setLists(data.listCount);
         setLoading(false);
       };
       refreshToken();
@@ -26,6 +28,7 @@ const Logout = () => {
     await axios.get("http://localhost:4000/user/logout", {
       withCredentials: true,
     });
+
     navigate("/");
     window.location.reload();
   };
@@ -39,27 +42,18 @@ const Logout = () => {
         <Loader />
       ) : (
         <Fragment>
-          <div className="w-100">
-            <article className="w-25 border border-2">
-              <section className="fs-3">User Data</section>
-              <p className="fs-5 mt-4 border border-2 w-100 p-3">
-                {first?.name}
-              </p>
-              <p className="fs-5 mt-4 border border-2 w-100 p-3">
-                {first?.email}
-              </p>
-              <p className="fs-5 mt-4 border border-2 w-100 p-3">
-                List Numbers
-              </p>
+          <div className="main_logout">
+            <article className="chide_logout border border-2">
+              <section className="section_log">User Data</section>
+              <p className="p_logout">{first?.name}</p>
+              <p className="p_logout">{first?.email}</p>
+              <p className="p_logout">{list} lists</p>
 
-              <button onClick={changPs} className="m-2 fs-8">
-                Changepassword{" "}
+              <button onClick={changPs} className="chang_button">
+                Changepassword
               </button>
 
-              <button
-                onClick={Logout}
-                className="w-100 border border-none fs-4"
-              >
+              <button onClick={Logout} className="logout_button">
                 Logout
               </button>
             </article>

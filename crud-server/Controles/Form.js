@@ -3,12 +3,7 @@ const bcrypt = require("bcrypt");
 const { sendToken } = require("../utils/sendToken");
 const User = require("../MongoDB/User_Model.js");
 const ErrorHandler = require("../utils/ErrorHandler");
-
-
-
-
-
-
+const LIST = require("../MongoDB/listModel.js");
 
 //post register
 exports.register = async (req, res, next) => {
@@ -26,18 +21,6 @@ exports.register = async (req, res, next) => {
   sendToken(user, res, "Registerd", 201);
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
 //post login
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -45,10 +28,10 @@ exports.login = async (req, res, next) => {
     if (!email || !password) {
       return next(new ErrorHandler("Something incorrect!", 400));
     }
-      const user = await User.findOne({ email }).select("+password");
-      if(!user){
-        return next(new ErrorHandler("Something incorrect!", 400));
-      }
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      return next(new ErrorHandler("Something incorrect!", 400));
+    }
     const comp = await user.comparePassword(password);
     // const comp = await bcrypt.compare(password,user.password);
     if (!comp) {
@@ -59,16 +42,6 @@ exports.login = async (req, res, next) => {
     console.log(error.message);
   }
 };
-
-
-
-
-
-
-
-
-
-
 
 /// get logout
 exports.logout = async (req, res) => {
@@ -81,53 +54,36 @@ exports.logout = async (req, res) => {
   });
 };
 
-
-
-
-
-
-
-
-
-
 //get user detail
 exports.getUser = async (req, res) => {
   const user = await User.findOne(req.user);
+  const listCount = await LIST.count();
   res.status(200).json({
     isAuth: true,
     user,
+    listCount,
   });
 };
 
-
-
-
-
-
-// changePassword 
+// changePassword
 exports.changePassword = async (req, res, next) => {
   const { oldPass, newPass } = req.body;
-try {
-  if (!oldPass || !newPass) {
-    return next(new ErrorHandler("fill Correctly", 400));
-  }
-  const user = await User.findById(req.user._id).select("+password");
-  const comp = await user.comparePassword(oldPass);
-  if (!comp) {
-    return next(new ErrorHandler("something is incorrect!", 400));
-  }
-  user.password = newPass;
-  await user.save();
-  res.status(200).json({
-    message: "Password Changed",
-  });
-
-} catch (error) {}
-
+  try {
+    if (!oldPass || !newPass) {
+      return next(new ErrorHandler("fill Correctly", 400));
+    }
+    const user = await User.findById(req.user._id).select("+password");
+    const comp = await user.comparePassword(oldPass);
+    if (!comp) {
+      return next(new ErrorHandler("something is incorrect!", 400));
+    }
+    user.password = newPass;
+    await user.save();
+    res.status(200).json({
+      message: "Password Changed",
+    });
+  } catch (error) {}
 };
-
-
-
 
 // exports.fargotPassword = (req,res,next) => {
 // }
