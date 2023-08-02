@@ -1,0 +1,39 @@
+.formcreate {
+    width: 40%;
+    height: 80vh;
+    background-color: rgb(213, 235, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+section {
+    font-size: 20px;
+    margin-top: 20px;
+    color: rgb(14, 9, 0);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.inputs {
+    width: 90%;
+    height: 3.4vmax;
+    margin: 20px 0px 20px 0px;
+    font-size: 17px;
+}
+
+.createButton {
+    width: 90%;
+    height: 3.4vmax;
+    margin: 20px 0px 20px 0px;
+    background-color: rgb(78, 155, 255);
+    outline: none;
+    border: none;
+    border: 2px solid rgb(231, 108, 7);
+    border-radius: 10px;
+    font-size: 20px;
+    color: rgb(14, 9, 0);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

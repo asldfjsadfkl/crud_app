@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  background-color: rgb(183, 223, 247);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  font-size: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 20vh;
+  animation-name: crud;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin: auto;
+  margin-top: 20%;
+}
+
+@keyframes crud {
+  100% {
+    transform: rotate(1000deg);
+  }
+
+  /* 20% {
+    transform: rotate(20deg);
+  }
+
+  30% {
+    transform: rotate(30deg);
+  } */
+
+  /* 40% {
+    transform: rotate(40deg);
+  }
+
+  50% {
+    transform: rotate(50deg);
+  }
+
+  60% {
+    transform: rotate(60deg);
+  }
+
+  70% {
+    transform: rotate(70deg);
+  }
+
+  80% {
+    transform: rotate(850deg);
+  }
+
+  90% {
+    transform: rotate(1000deg);
+  }
+
+  100% {
+    transform: rotate(150deg); */
+  /* } */
+}
